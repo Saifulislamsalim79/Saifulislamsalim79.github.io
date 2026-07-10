@@ -1,0 +1,27 @@
+---
+import { profile } from '../data/profile';
+import { path } from '../utils/paths';
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="foot-name">{profile.name.full}</p>
+    <p class="muted">{profile.role}</p>
+    <ul class="foot-links">
+      <li><a href={`mailto:${profile.contacts.email}`}>{profile.contacts.email}</a></li>
+      <li><a href={profile.contacts.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      {profile.contacts.scholar ? <li><a href={profile.contacts.scholar} target="_blank" rel="noopener noreferrer">Google Scholar</a></li> : null}
+      {profile.contacts.github ? <li><a href={profile.contacts.github} target="_blank" rel="noopener noreferrer">GitHub</a></li> : null}
+    </ul>
+    <p class="muted advisor">Advisor: <a href={`mailto:${profile.contacts.advisor.email}`}>{profile.contacts.advisor.name}</a></p>
+    <p class="muted built">Built with Astro · <a href={path('/cv')}>CV</a></p>
+  </div>
+</footer>
+
+<style>
+.site-footer{margin-top:3rem;padding:2rem 0 3rem;border-top:1px solid var(--border)}
+.foot-name{color:var(--text);font-weight:700;margin:0 0 .15rem}
+.foot-links{list-style:none;padding:0;margin:.6rem 0;display:flex;flex-wrap:wrap;gap:.4rem 1rem}
+.foot-links li{font-size:.9rem}
+.advisor{font-size:.86rem;margin:.4rem 0 0}
+.built{font-size:.78rem;margin-top:1.2rem}
+</style>
