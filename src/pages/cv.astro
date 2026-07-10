@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import CvTimeline from '../components/CvTimeline.astro';
+import { path } from '../utils/paths';
+import { profile } from '../data/profile';
+
+const edu = profile.education.map(e => ({
+  period: e.period,
+  title: e.degree,
+  org: `${e.school} · ${e.location}`,
+  detail: [e.gpa && `GPA: ${e.gpa}`, 'focus' in e && e.focus && `Focus: ${e.focus}`, e.advisor && `Advisor: ${e.advisor}`, 'thesis' in e && e.thesis && `Thesis: "${e.thesis}"`].filter(Boolean).join(' · '),
+}));
+const expItems = profile.experience.map(x => ({ period: x.period, title: x.role, org: x.org, detail: x.detail }));
+---
+<BaseLayout title="CV — Saiful Islam Salim" current="cv">
+  <Section title="Curriculum Vitae" eyebrow="Overview">
+    <p class="muted">{profile.bio}</p>
+    <p style="margin-top:1.1rem"><a class="btn" href={path('/CV_Saiful_Islam_Salim.pdf')} download>Download full CV (PDF)</a></p>
+  </Section>
+
+  <Section title="Education" eyebrow="Degrees">
+    <CvTimeline items={edu} />
+  </Section>
+
+  <Section title="Experience" eyebrow="Appointments">
+    <CvTimeline items={expItems} />
+  </Section>
+
+  <Section title="Awards" eyebrow="Selective honors">
+    <ul class="award-list">
+      {profile.awards.map(a => <li><b>{a.title}</b>{a.org ? ` — ${a.org}` : ''} <span class="muted">· {a.period}</span></li>)}
+    </ul>
+  </Section>
+
+  <Section title="Extracurricular" eyebrow="Leadership & service">
+    <ul>{profile.extracurricular.map(x => <li>{x}</li>)}</ul>
+  </Section>
+
+  <Section title="References" eyebrow="Available upon request / listed in CV">
+    <div class="grid grid--2">
+      {profile.references.map(r => (
+        <p class="ref"><b>{r.name}</b><br /><span class="muted">{r.titles}</span><br /><span class="muted">{r.org}</span><br /><a href={`mailto:${r.email}`}>{r.email}</a></p>
+      ))}
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+.award-list{list-style:none;padding:0;margin:0}
+.award-list li{padding:.5rem 0;border-bottom:1px solid var(--border)}
+ul{margin:.2rem 0 0;padding-left:1.2rem}
+.ref{color:var(--text-body);font-size:.92rem}
+</style>

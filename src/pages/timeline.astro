@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import MilestoneTimeline from '../components/MilestoneTimeline.astro';
+import { getCollection } from 'astro:content';
+import { buildMilestones } from '../utils/milestones';
+import type { Publication } from '../content/schemas';
+
+const publications = (await getCollection('publications')).map(e => e.data as Publication);
+const events = (await getCollection('events')).map(e => e.data);
+const milestones = buildMilestones({ publications, events });
+---
+<BaseLayout title="Timeline — Saiful Islam Salim" current="timeline">
+  <Section title="Timeline" eyebrow="Events, awards, talks & publications">
+    <p class="muted">A reverse-chronological log — each accepted paper becomes a milestone automatically; awards, talks, education, and service are added by hand.</p>
+    <div style="margin-top:1.4rem"><MilestoneTimeline milestones={milestones} /></div>
+  </Section>
+</BaseLayout>

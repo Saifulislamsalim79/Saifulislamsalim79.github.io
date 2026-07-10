@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import PublicationList from '../components/PublicationList.astro';
+import { getCollection } from 'astro:content';
+import type { Publication } from '../content/schemas';
+
+const all = (await getCollection('publications'))
+  .map(e => e.data)
+  .sort((a: Publication, b: Publication) => a.order - b.order || b.year - a.year);
+
+const conf = all.filter(p => p.type === 'conference');
+const jour = all.filter(p => p.type === 'journal');
+const post = all.filter(p => p.type === 'poster');
+
+const countOf = (a: Publication[]) => `${a.length}`;
+---
+<BaseLayout title="Publications — Saiful Islam Salim" current="publications">
+  <Section title="Publications" eyebrow={`${countOf(conf)} conference · ${countOf(jour)} journal · ${countOf(post)} poster`}>
+    <p class="muted">Author lists and venue strings are transcribed from the CV. My name is bolded to highlight first-authorship. <span class="muted">(★ marks featured / award work.)</span></p>
+  </Section>
+  <Section title="Conference" eyebrow="Full papers">
+    <PublicationList pubs={conf} />
+  </Section>
+  <Section title="Journal" eyebrow="Articles">
+    <PublicationList pubs={jour} />
+  </Section>
+  <Section title="Posters & demos" eyebrow="Other">
+    <PublicationList pubs={post} />
+  </Section>
+</BaseLayout>
