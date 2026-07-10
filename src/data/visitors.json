@@ -1,5 +1,7 @@
 {
   "updated": "2026-07-10",
-  "total": 0,
-  "countries": {}
+  "total": 2,
+  "countries": {
+    "US": 2
+  }
 }
