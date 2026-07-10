@@ -17,7 +17,7 @@ const updatedStr = data.updated
 <BaseLayout title="Visitors — Saiful Islam Salim">
   <Section title="Visitors" eyebrow="Around the world">
     {data.total > 0 ? (
-      <p class="muted">{data.total.toLocaleString('en-US')} visits · Updated {updatedStr}</p>
+      <p class="muted">{data.total.toLocaleString('en-US')} visitors · Updated {updatedStr}</p>
     ) : (
       <p class="muted">Collecting data — check back soon.</p>
     )}
