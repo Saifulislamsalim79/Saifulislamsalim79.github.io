@@ -1,10 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import PublicationList from '../components/PublicationList.astro';
+import ResearchAreaCard from '../components/ResearchAreaCard.astro';
+import { getCollection } from 'astro:content';
+import { path } from '../utils/paths';
+import { profile } from '../data/profile';
+import { selectFeatured } from '../utils/milestones';
+
+const pubs = (await getCollection('publications')).map(e => e.data);
+const featured = selectFeatured(pubs);
 ---
 <BaseLayout title="Saiful Islam Salim — Home" current="home">
-  <section class="wrap stack" style="padding:3rem 0">
-    <p class="eyebrow">Scaffold</p>
-    <h1>Saiful Islam Salim</h1>
-    <p class="muted">Shell builds and the theme toggle should work.</p>
-  </section>
+  <Hero />
+
+  <Section title="Featured work" eyebrow="Publications" id="featured">
+    <PublicationList pubs={featured} />
+    <p style="margin-top:1.2rem"><a class="btn btn--ghost" href={path('/publications')}>All publications →</a></p>
+  </Section>
+
+  <Section title="Research" eyebrow="What I work on" id="research">
+    <div class="grid grid--2">
+      {profile.researchAreas.map(a => <ResearchAreaCard area={a} />)}
+    </div>
+    <p style="margin-top:1.2rem"><a class="btn btn--ghost" href={path('/research')}>More about my research →</a></p>
+  </Section>
+
+  <Section title="Timeline" eyebrow="Events & milestones" id="timeline-tease">
+    <p>A running log of paper acceptances, awards, talks, and service. <a href={path('/timeline')}>Open the timeline →</a></p>
+  </Section>
 </BaseLayout>
