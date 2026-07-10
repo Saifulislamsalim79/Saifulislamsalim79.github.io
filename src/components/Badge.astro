@@ -1,0 +1,13 @@
+---
+interface Props { label: string; tone?: 'accent' | 'award' | 'muted'; }
+const { label, tone = 'accent' } = Astro.props;
+---
+<span class={`badge badge--${tone}`}>{label}</span>
+
+<style>
+.badge{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.02em;
+  padding:.16rem .5rem;border-radius:5px;border:1px solid transparent}
+.badge--accent{background:color-mix(in oklab,var(--accent) 18%,transparent);color:var(--accent);border-color:color-mix(in oklab,var(--accent) 30%,transparent)}
+.badge--award{background:var(--badge-bg);color:var(--badge-fg);border-color:color-mix(in oklab,var(--badge-fg) 35%,transparent)}
+.badge--muted{background:var(--surface);color:var(--muted);border-color:var(--border)}
+</style>
