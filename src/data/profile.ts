@@ -11,6 +11,7 @@ export const profile = {
   ],
   contacts: {
     email: 'saifulislam@arizona.edu',
+    emailAlt: 'salim.buet.13@gmail.com',
     linkedin: 'https://www.linkedin.com/in/saiful-islam-salim',
     scholar: 'https://scholar.google.com/citations?user=PRLujl4AAAAJ&hl=en',
     github: 'https://github.com/Saifulislamsalim79',

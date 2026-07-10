@@ -5,7 +5,6 @@ import { path } from '../utils/paths';
 <section class="hero">
   <div class="wrap hero-row">
     <div class="hero-text">
-      <p class="eyebrow">{profile.role}</p>
       <h1>{profile.name.full}<span class="hero-accent">.</span></h1>
       <div class="hero-bio">
         {profile.about.map(para => <p set:html={para} />)}
