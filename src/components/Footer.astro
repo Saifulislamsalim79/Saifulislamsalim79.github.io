@@ -12,7 +12,6 @@ const emails = [profile.contacts.email, profile.contacts.emailAlt].filter(Boolea
 ---
 <footer class="site-footer">
   <div class="wrap">
-    <p class="foot-name">{profile.name.full}</p>
     <ul class="foot-emails">
       {emails.map(e => <li><span class="email">{e}</span></li>)}
     </ul>
@@ -45,8 +44,7 @@ const emails = [profile.contacts.email, profile.contacts.emailAlt].filter(Boolea
 
 <style>
 .site-footer{margin-top:3rem;padding:2rem 0 3rem;border-top:1px solid var(--border)}
-.foot-name{color:var(--text);font-weight:700;margin:0 0 .15rem}
-.foot-emails{list-style:none;padding:0;margin:.6rem 0 0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem}
+.foot-emails{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem}
 .foot-emails li{font-size:.9rem}
 .email{color:var(--text-body)}
 .foot-social{list-style:none;padding:0;margin:.8rem 0 0;display:flex;gap:.9rem}

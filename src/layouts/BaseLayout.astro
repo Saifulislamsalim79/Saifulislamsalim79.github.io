@@ -18,13 +18,13 @@ const { title = 'Saiful Islam Salim', current, description = profile.bio } = Ast
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {/* no-FOUC: set theme before paint. Runs synchronously in <head>. */}
+    {/* no-FOUC: set theme before paint. Runs synchronously in <head>.
+        Dark is the default regardless of OS preference; only an explicit
+        toggle choice (persisted in localStorage) overrides it. */}
     <script is:inline>
       (function () {
         try {
-          var t = localStorage.getItem('theme');
-          if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-          document.documentElement.dataset.theme = t;
+          document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
         } catch (e) {}
       })();
       document.addEventListener('click', function (e) {
