@@ -17,7 +17,7 @@ const updatedStr = data.updated
 <BaseLayout title="Visitors — Saiful Islam Salim">
   <Section title="Visitors" eyebrow="Around the world">
     {data.total > 0 ? (
-      <p class="muted">{data.total.toLocaleString('en-US')} visitors · Updated {updatedStr}</p>
+      <p class="muted"><span data-live-total>{data.total.toLocaleString('en-US')}</span> visitors · Map updated {updatedStr}</p>
     ) : (
       <p class="muted">Collecting data — check back soon.</p>
     )}
@@ -43,6 +43,23 @@ const updatedStr = data.updated
     </p>
   </Section>
 </BaseLayout>
+
+{/* Live total via GoatCounter's public, token-free counter endpoint (CORS *).
+    Progressive enhancement: on any failure the build-time number stays. */}
+<script is:inline>
+  (function () {
+    var el = document.querySelector('[data-live-total]');
+    if (!el) return;
+    fetch('https://saifulislamsalim.goatcounter.com/counter/TOTAL.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d) return;
+        var n = parseInt(String(d.count_unique || d.count || '').replace(/\D/g, ''), 10);
+        if (n > 0) el.textContent = n.toLocaleString('en-US');
+      })
+      .catch(function () {});
+  })();
+</script>
 
 <style>
 .vmap{width:100%;height:auto;margin-top:1.2rem}
