@@ -1,8 +1,10 @@
 ---
+import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../data/profile';
+import { path } from '../utils/paths';
 
 interface Props {
   title?: string;
@@ -10,6 +12,8 @@ interface Props {
   description?: string;
 }
 const { title = 'Saiful Islam Salim', current, description = profile.bio } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('headshot_saiful.jpg', Astro.site);
 ---
 <!doctype html>
 <html lang="en" data-theme="dark">
@@ -18,6 +22,14 @@ const { title = 'Saiful Islam Salim', current, description = profile.bio } = Ast
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={path('/favicon.svg')} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
     {/* no-FOUC: set theme before paint. Runs synchronously in <head>.
         Dark is the default regardless of OS preference; only an explicit
         toggle choice (persisted in localStorage) overrides it. */}

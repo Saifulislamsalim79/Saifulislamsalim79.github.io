@@ -18,7 +18,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text-body);
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+  font-family:'Inter Variable',Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
 :where(h1,h2,h3){color:var(--text);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:0}
 h2{font-weight:600;letter-spacing:-.03em}
 a{color:var(--accent);text-underline-offset:2px}
