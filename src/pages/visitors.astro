@@ -63,8 +63,11 @@ const updatedStr = data.updated
 
 <style>
 .vmap{width:100%;height:auto;margin-top:1.2rem}
-.vmap .c{fill:var(--surface-elev);stroke:var(--border);stroke-width:.5}
-.vmap .v1{fill:color-mix(in oklab,var(--accent) 25%,var(--surface-elev))}
+/* Base fill/stroke lean on --muted so landmass stays visible on the light
+   theme, where --surface-elev is nearly the page background. */
+.vmap .c{fill:color-mix(in oklab,var(--muted) 16%,var(--surface-elev));
+  stroke:color-mix(in oklab,var(--muted) 38%,var(--bg));stroke-width:.5}
+.vmap .v1{fill:color-mix(in oklab,var(--accent) 30%,var(--surface-elev))}
 .vmap .v2{fill:color-mix(in oklab,var(--accent) 45%,var(--surface-elev))}
 .vmap .v3{fill:color-mix(in oklab,var(--accent) 68%,var(--surface-elev))}
 .vmap .v4{fill:var(--accent)}
