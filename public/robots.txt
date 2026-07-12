@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://saifulislamsalim79.github.io/sitemap-index.xml
+Sitemap: https://saifulislamsalim.github.io/sitemap-index.xml

@@ -14,7 +14,7 @@ export const profile = {
     emailAlt: 'salim.buet.13@gmail.com',
     linkedin: 'https://www.linkedin.com/in/saiful-islam-salim',
     scholar: 'https://scholar.google.com/citations?user=PRLujl4AAAAJ&hl=en',
-    github: 'https://github.com/Saifulislamsalim79',
+    github: 'https://github.com/saifulislamsalim',
     advisor: { name: 'Dr. Mihai Surdeanu', email: 'msurdeanu@arizona.edu' },
   },
   education: [
