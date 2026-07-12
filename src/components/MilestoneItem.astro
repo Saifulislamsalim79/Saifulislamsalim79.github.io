@@ -1,4 +1,6 @@
 ---
+import { path } from '../utils/paths';
+
 const KIND_LABEL: Record<string, string> = {
   award: 'Award', talk: 'Talk', education: 'Education', service: 'Service', news: 'Publication',
 };
@@ -10,7 +12,7 @@ const dateStr = m.date.toLocaleDateString('en-US', { month: 'short', year: 'nume
 <li class={`ms ms--${m.kind}${m.pinned ? ' ms--pinned' : ''}`}>
   <span class="ms-kind">{KIND_LABEL[m.kind] ?? m.kind}</span>
   <span class="ms-date">{dateStr}</span>
-  <p class="ms-title">{m.href ? <a href={m.href} target="_blank" rel="noopener noreferrer">{m.title}</a> : m.title}</p>
+  <p class="ms-title">{m.href ? <a href={path(m.href)} target="_blank" rel="noopener noreferrer">{m.title}</a> : m.title}</p>
   {m.detail && <p class="ms-detail muted">{m.detail}</p>}
 </li>
 

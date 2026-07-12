@@ -27,7 +27,9 @@ export function pubToMilestone(pub: Publication): Milestone {
     kind: 'news',
     title: pub.title,
     detail: detailParts.join(' · '),
-    href: pub.url,
+    // Prefer the locally served PDF; consumers pass hrefs through path() so
+    // the site-internal /papers/ route works under any base.
+    href: pub.pdf ? `/papers/${pub.pdf}` : pub.url,
     pinned: Boolean(pub.featured),
   };
 }

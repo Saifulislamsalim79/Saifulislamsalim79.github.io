@@ -35,6 +35,12 @@ describe('pubToMilestone', () => {
     const m = pubToMilestone(pub({ status: 'under-review', venue: 'ACL' }));
     expect(m.detail).toMatch(/under review/i);
   });
+
+  it('links to the local PDF when present, else the external url', () => {
+    expect(pubToMilestone(pub({ pdf: 'x.pdf' })).href).toBe('/papers/x.pdf');
+    expect(pubToMilestone(pub({ pdf: 'x.pdf', url: 'https://doi.org/y' })).href).toBe('/papers/x.pdf');
+    expect(pubToMilestone(pub({ url: 'https://doi.org/y' })).href).toBe('https://doi.org/y');
+  });
 });
 
 describe('buildMilestones', () => {
