@@ -5,8 +5,8 @@ import { groupByYear, type Milestone } from '../utils/milestones';
 interface Props { milestones: Milestone[]; }
 const { milestones } = Astro.props;
 const groups = groupByYear(milestones);
-// within each year, pinned first then by date desc (groupByYear already kept date desc)
-const sortYear = (items: Milestone[]) => [...items].sort((a, b) => Number(Boolean(b.pinned)) - Number(Boolean(a.pinned)) || b.date.getTime() - a.date.getTime());
+// strictly newest-first within each year; pinned items keep their star but don't jump the order
+const sortYear = (items: Milestone[]) => [...items].sort((a, b) => b.date.getTime() - a.date.getTime());
 ---
 {groups.length === 0 ? (
   <p class="muted">No events yet.</p>

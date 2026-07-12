@@ -39,9 +39,15 @@ async function api(site, token, path, params = {}) {
   const url = new URL(`https://${site}.goatcounter.com/api/v0/${path}`);
   url.searchParams.set('start', START);
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v));
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-  if (!res.ok) throw new Error(`GoatCounter ${path} -> HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  return res.json();
+  // GoatCounter occasionally throws transient errors (even 404s); retry before failing the run.
+  let lastErr;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    if (res.ok) return res.json();
+    lastErr = new Error(`GoatCounter ${path} -> HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    if (attempt < 3) await new Promise((r) => setTimeout(r, attempt * 5000));
+  }
+  throw lastErr;
 }
 
 async function main() {
