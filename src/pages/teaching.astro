@@ -20,10 +20,14 @@ import { profile } from '../data/profile';
 
   <Section title="Mentoring" eyebrow="Former student collaborators">
     <table class="mentor-table">
-      <thead><tr><th>Student</th><th>While at</th><th>Now at</th></tr></thead>
+      <thead><tr><th>Student</th><th>While at</th><th>Currently</th></tr></thead>
       <tbody>
         {profile.mentoring.map(m => (
-          <tr><td>{m.name}</td><td>{m.from}</td><td>{m.now || '—'}</td></tr>
+          <tr>
+            <td>{m.href ? <a href={m.href} target="_blank" rel="noopener noreferrer">{m.name}</a> : m.name}</td>
+            <td>{m.from}</td>
+            <td>{m.now || '—'}</td>
+          </tr>
         ))}
       </tbody>
     </table>
